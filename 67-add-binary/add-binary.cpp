@@ -8,11 +8,10 @@ public:
 
         while(i>=0||j>=0||carry)
         {
-            int sum=carry;
-            if(i>=0) sum+=a[i--]-'0';
-            if(j>=0) sum+=b[j--]-'0';
-            result+=(sum%2)+'0';
-            carry=sum/2;
+            if(i>=0) carry+=a[i--]-'0';
+            if(j>=0) carry+=b[j--]-'0';
+            result+=(carry%2)+'0';
+            carry=carry/2;
         }
         reverse(result.begin(), result.end());
         return result;
