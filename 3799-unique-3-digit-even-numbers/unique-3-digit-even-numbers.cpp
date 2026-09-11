@@ -1,24 +1,27 @@
 class Solution {
 public:
     int totalNumbers(vector<int>& digits) {
-        int cnt[10] = {0};
-        for (int d : digits) cnt[d]++;
-
-        int total = 0;
-        for (int h = 1; h <= 9; h++) {          
-            for (int t = 0; t <= 9; t++) {
-                for (int u = 0; u <= 8; u += 2) { 
-                    int need[10] = {0};
-                    need[h]++; need[t]++; need[u]++;
-
-                    bool ok = true;
-                    for (int d = 0; d <= 9 && ok; d++)
-                        if (need[d] > cnt[d]) ok = false;
-
-                    if (ok) total++;
+        int cnt[10] = {};
+        for (int d : digits)
+            cnt[d]++;
+        int res = 0;
+        for (int a = 1; a <= 9; a++) {
+            if (cnt[a] == 0)
+                continue;
+            cnt[a]--;
+            for (int b = 0; b <= 9; b++) {
+                if (cnt[b] == 0)
+                    continue;
+                cnt[b]--;
+                for (int c = 0; c <= 8; c += 2) {
+                    if (cnt[c] > 0)
+                        res++;
                 }
+                cnt[b]++;
             }
+
+            cnt[a]++;
         }
-        return total;
+        return res;
     }
 };
